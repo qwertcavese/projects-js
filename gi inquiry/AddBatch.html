@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Batch</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <!-- Option 1: Include in HTML -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .dropdown-menu.center {
+      left: 0% !important;
+      transform: translateX(-63%);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="Home.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Add Batch
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="AddEnquires.html">Add Enquires</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="AddCourses.html">Add Courses</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- <button class="btn btn-outline-success" type="submit">Profile</button> -->
+
+        <div class="dropdown">
+          <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle fs-4"></i>
+          </button>
+          <ul class="dropdown-menu center">
+            <li><a class="dropdown-item" href="#">Name</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="body-main">
+    <div class="container">
+      <form action="#">
+        <div class="user__details">
+          <div class="input__box">
+            <span class="details">Batch Name</span>
+            <input type="text" id="batch-name" placeholder="E.g: HTML" required />
+          </div>
+          <div class="input__box">
+            <span class="details">Time</span>
+            <input type="text" id="time" required />
+          </div>
+          <div class="input__box">
+            <span class="details">Trainer Name</span>
+            <input type="text" id="trainer" placeholder="E.g: John Smith" required />
+          </div>
+          <div class="input__box">
+            <span class="details">Daily Hours</span>
+            <input type="number" id="daily-hrs" placeholder="(Optional)" />
+          </div>
+          <div class="input__box">
+            <span class="details">Set Date</span>
+            <input type="date" id="start-date" placeholder="Enter Area" required />
+          </div>
+          <div class="input__box">
+            <span class="details">End Date</span>
+            <input type="date" id="end-date" required />
+          </div>
+
+          <div class="input__box" style="width: 50%">
+            <span class="details">Day's</span>
+            <input type="text" placeholder="E.g:  Monday,Tuesday..etc" ] id="weekly-days" required />
+          </div>
+        </div>
+
+        <hr />
+
+        <div>
+          <h4>Courses:-</h4>
+          <div class="user__details" id="courses-div" style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                justify-content: flex-start;
+                margin-top: 0px;
+                gap: 15px;
+                flex-wrap: wrap;
+              ">
+            <div style="width: 350px;">
+              <span class="details" style="font-weight: 500">Course</span>
+              <!-- <div class="course-dropdown" onclick="showDropDown()">
+                <div id="select-course-heading1">Select Course</div>
+                <div>
+
+                  <img src="assets/down-arrow.png" alt="icon" style="height: 20px;width: 20px;">
+                </div>
+              </div>
+              <div class="course-drop-list" id="course-drop-list">
+
+              </div> -->
+              <select class="course-dropdown" style="width: 100%;" name="" id="batch-drop-down">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- <hr /> -->
+
+        <div style="display: flex; gap: 15px">
+          <div class="button" style="width: 15%">
+            <input type="Reset" value="Reset" />
+          </div>
+          <div class="button" style="width: 15%">
+            <input type="button" value="Register" onclick="apiObj.addBatch()" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+<script src="Index.js"></script>
+<script defer>
+</script>
+
+</html>
