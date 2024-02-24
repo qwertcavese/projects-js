@@ -95,7 +95,7 @@
 
           <div class="input__box" style="width: 50%">
             <span class="details">Day's</span>
-            <input type="text" placeholder="E.g:  Monday,Tuesday..etc" ] id="weekly-days" required />
+            <input type="text" placeholder="E.g:  Monday,Tuesday..etc" id="weekly-days" required />
           </div>
         </div>
 
@@ -114,17 +114,7 @@
               ">
             <div style="width: 350px;">
               <span class="details" style="font-weight: 500">Course</span>
-              <!-- <div class="course-dropdown" onclick="showDropDown()">
-                <div id="select-course-heading1">Select Course</div>
-                <div>
-
-                  <img src="assets/down-arrow.png" alt="icon" style="height: 20px;width: 20px;">
-                </div>
-              </div>
-              <div class="course-drop-list" id="course-drop-list">
-
-              </div> -->
-              <select class="course-dropdown" style="width: 100%;" name="" id="batch-drop-down">
+              <select class="course-dropdown" style="width: 100%;" name="" id="batch-drop-down" >
               </select>
             </div>
           </div>
@@ -145,7 +135,8 @@
   </div>
 </body>
 <script src="Index.js"></script>
-<script defer>
+<script>
+  apiObj.getAllCoursesAndFeesBatch();
 </script>
 
 </html>

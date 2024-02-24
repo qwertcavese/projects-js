@@ -51,6 +51,7 @@ class courseAndFees {
     this.pdf;
     this.displayTotalFees;
   }
+
   handleChange(event) {
     //  console.log(event.target);
     // console.log(this.courseDetails);
@@ -79,6 +80,7 @@ class courseAndFees {
     document.getElementById("show-fees").value = this.displayTotalFees;
     document.getElementById("select-course-heading").innerHTML = `${this.courseId.length} Courses Selected `;
   }
+
 }
 var courseAndFeesObj = new courseAndFees()
 
@@ -90,7 +92,7 @@ class apiServices {
     this.url = 'http://192.168.29.183:8000'
   }
 
-  getAllCoursesAndFees() {
+  getAllCoursesAndFeesEnquires() {
     fetch(`${this.url}/get_all_course_and_fees`, {
       headers: {
         'accept': 'application/json'
@@ -99,19 +101,35 @@ class apiServices {
       .then(res => res.json())
       .then((res) => {
         var div = ``
-        // var tbl=``
         res.courses_and_fees.map((value) => {
           // console.log(value);
-          div += `<div style='cursor:pointer;'><input type="checkbox" style='cursor:pointer;' onchange='courseAndFeesObj.handleChange(event)' id=${value.course_id} /> ${value.course_name} </div> `
+          div += `<div style='cursor:pointer;'><input type="checkbox" style='cursor:pointer;' onchange='courseAndFeesObj.handleChange(event)' id=${value.course_id}/> ${value.course_name} </div> `
 
           courseAndFeesObj.courseDetails[value.course_id] = value;
 
-          // tbl+=`<option value=${value.course_id}>${value.course_name}</option>`
-
         })
         document.getElementById("course-drop-list").innerHTML = div
-        // document.getElementById("batch-drop-down").innerHTML = tbl
-        // console.log(tbl);
+      })
+  }
+
+  getAllCoursesAndFeesBatch() {
+    fetch(`${this.url}/get_all_course_and_fees`, {
+      headers: {
+        'accept': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then((res) => {
+        var opt = ``
+        opt += `<option>Select Course</option>`
+        res.courses_and_fees.map((value) => {
+          // console.log(value);
+          opt += `<option value=${value.course_id}>${value.course_name}</option>`
+
+          // courseAndFeesObj.courseDetails[value.course_id] = value;
+
+        })
+        document.getElementById("batch-drop-down").innerHTML = opt
       })
   }
 
@@ -159,7 +177,7 @@ class apiServices {
         'weekly_days': document.getElementById("weekly-days").value,
         'trainer_name': document.getElementById("trainer").value,
         'expected_end_date': document.getElementById("end-date").value,
-        'course_id': courseAndFeesObj.courseId
+        'course_id': document.getElementById("batch-drop-down").value
       })
     })
       .then(res => res.json())
@@ -191,4 +209,3 @@ class apiServices {
   }
 }
 var apiObj = new apiServices();
-apiObj.getAllCoursesAndFees()
