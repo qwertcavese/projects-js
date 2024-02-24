@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sign in</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+      integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <style>
+      /* Importing fonts from Google */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+      /* Reseting */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #5e5e5e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .wrapper {
+        max-width: 350px;
+        min-height: 500px;
+        margin: 80px auto;
+        padding: 40px 30px 30px 30px;
+        background-color: #ecf0f3;
+        border-radius: 15px;
+      }
+
+      .logo {
+        width: 80px;
+        margin: auto;
+        /* background-color: #03A9F4; */
+        text-align: center;
+      }
+
+      .logo img {
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0px 0px 3px #5f5f5f, 0px 0px 0px 5px #ecf0f3,
+          8px 8px 15px #a7aaa7, -8px -8px 15px #fff;
+        padding: 5px;
+      }
+
+      .wrapper .name {
+        font-weight: 600;
+        font-size: 1.4rem;
+        letter-spacing: 1.3px;
+        padding-left: 10px;
+        color: #555;
+      }
+
+      .wrapper .form-field input {
+        width: 100%;
+        display: block;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 1.2rem;
+        color: #666;
+        padding: 10px 15px 10px 10px;
+        /* border: 1px solid red; */
+      }
+
+      .wrapper .form-field {
+        padding-left: 10px;
+        margin-bottom: 20px;
+        /* border-radius: 20px; */
+        box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+      }
+
+      .wrapper .form-field .fas {
+        color: #555;
+      }
+
+      .wrapper .btn {
+        box-shadow: none;
+        width: 100%;
+        height: 40px;
+        background-color: #03a9f4;
+        color: #fff;
+        /* border-radius: 25px; */
+        box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
+        letter-spacing: 1.3px;
+      }
+
+      .wrapper .btn:hover {
+        background-color: #039be5;
+      }
+
+      .wrapper .forget-pwd-btn {
+        text-decoration: none;
+        font-size: 0.8rem;
+        color: #03a9f4;
+        border: none;
+      }
+
+      .wrapper a:hover {
+        color: #039be5;
+      }
+
+      @media (max-width: 380px) {
+        .wrapper {
+          margin: 30px 20px;
+          padding: 40px 15px 15px 15px;
+          max-width: 300px;
+          min-height: 450px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="logo">
+        <img
+          src="assets/d11c2c52a00609a82bcbc13188c3d112109635.png"
+          id="gi-logo"
+          alt="GI"
+        />
+      </div>
+      <div class="text-center mt-4 name">Login Here</div>
+      <form class="p-3 mt-3">
+        <div class="form-field d-flex align-items-center">
+          <span class="far fa-user"></span>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="form-field d-flex align-items-center">
+          <span class="fas fa-key"></span>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button class="btn mt-3" type="button" id="login-btn" onclick="login()">
+          Login
+        </button>
+      </form>
+      <div class="text-center fs-6">
+        <button class="forget-pwd-btn" disabled>Forget password?</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    if (localStorage.getItem("user")) {
+      var access = localStorage.getItem("user");
+      var lastIndex = access.lastIndexOf(",");
+      var email = access.substring(0, lastIndex);
+      var pwd = access.substring(lastIndex + 1, access.length);
+      document.getElementById("email").value = email;
+      document.getElementById("password").value = pwd;
+    }
+
+    function login() {
+      if (document.getElementById("email").value == "") {
+        alert("Please Enter Email");
+        document.getElementById("email").focus();
+      } else if (document.getElementById("password").value == "") {
+        alert("Please Enter Password");
+        document.getElementById("password").focus();
+      } else {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        axios
+          .post(
+            "http://192.168.29.183:8000/login",
+            new URLSearchParams({
+              email: email,
+              password: password,
+            }),
+            {
+              headers: {
+                accept: "application/json",
+              },
+            }
+          )
+          .then((res) => {
+            alert(res.data.detail.message);
+
+            localStorage.setItem("user", [
+              document.getElementById("email").value,
+              document.getElementById("password").value,
+            ]);
+            sessionStorage.setItem("counselorId",res.data.detail.counselor_id);
+            window.location.href = "Home.html";
+          })
+          .catch((res) => alert(res.response.data.detail.message));
+      }
+
+      //   fetch("http://192.168.29.183:8000/login", {
+      //     method: "POST",
+      //     headers: {
+      //       accept: "application/json",
+      //     },
+      //     body: new URLSearchParams({
+      //       email: email,
+      //       password: password,
+      //     })
+      //       .then((res) => {
+      //         return res.json();
+      //       })
+      //       .then((res) => {
+      //         console.log(res);
+      //       }),
+      //   });
+    }
+  </script>
+</html>

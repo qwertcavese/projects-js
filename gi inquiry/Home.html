@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="Index.js"></script>
+    <style>
+      .dropdown-menu.center {
+        left: 0% !important;
+        transform: translateX(-63%);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Home.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Services
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="AddEnquires.html"
+                    >Add Enquires</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="AddBatch.html">Add Batch</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="AddCourses.html"
+                    >Add Courses</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Display Data
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="Allstudents.html">
+                    All Students</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="Allbatches.html"
+                    >All Batches</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- <button class="btn btn-outline-success" type="button">Profile</button> -->
+
+          <div class="dropdown">
+            <button
+              class="btn btn-light dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle fs-4"></i>
+            </button>
+            <ul class="dropdown-menu center">
+              <li><a class="dropdown-item" href="#">Name</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="content">
+        <div style="max-height: 400px; overflow: scroll">
+          <span class="text text-dark fw-bolder ms-2 fs-1">All Courses</span>
+          <input
+            type="search"
+            placeholder="Search Course..."
+            id="searchInput"
+            class="rounded-2 w-50 ms-5"
+            oninput="serch_course()"
+          />
+          <div id="searchResults"></div>
+          <table
+            class="table table-bordered table-hover table-responsive text-center"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Fees</th>
+                <th>Duration</th>
+                <th>Subjects</th>
+                <th>Status</th>
+                <!-- <th hidden>id</th> -->
+              </tr>
+            </thead>
+            <tbody id="tbl_data"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        <span class="text text-dark fw-bolder ms-2 fs-1"
+          >All Consular Courses</span
+        >
+
+        <div style="max-height: 400px; overflow: scroll">
+          <table
+            class="table table-bordered table-hover table-responsive text-center"
+          >
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Counselor Name</th>
+                <th>type_of_operation</th>
+                <th>time_stamp</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_couns_data"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="content">
+        <span class="text text-dark fw-bolder ms-2 fs-1"
+          >All Consular Batches</span
+        >
+        <div style="max-height: 400px; overflow: scroll">
+          <table
+            class="table table-bordered table-hover table-responsive text-center"
+          >
+            <thead>
+              <tr>
+                <th>Batch Name</th>
+                <th>Counselor Name</th>
+                <th>type_of_operation</th>
+                <th>time_stamp</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_counsBatch_data"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- model -->
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Task Details View</h5>
+          </div>
+          <div class="modal-body">
+            <h5>Name: <span id="name"></span></h5>
+            <h5>Fees: <span id="fees"></span></h5>
+            <h5>Pdf: <span id="pdf"></span></h5>
+            <h5>Sample Project: <span id="sam_project"></span></h5>
+            <h5>Other Link: <span id="other_link"></span></h5>
+            <h5>Note: <span id="note"></span></h5>
+            <h5>Duration: <span id="duration"></span></h5>
+            <h5>prerequisites_sub: <span id="subjects"></span></h5>
+            <h5>description: <span id="desc"></span></h5>
+            <h5>objective: <span id="obj"></span></h5>
+            <h5>status: <span id="status"></span></h5>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-dismiss="modal"
+              onclick="close()"
+            >
+              Close
+            </button>
+
+            <a href="#" style="text-decoration: none" id="editLink">
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                id="btned"
+                onclick="editcourse()"
+              >
+                Edit
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="modalMessage"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function popup(id) {
+      var modal = new bootstrap.Modal(document.querySelector(".modal"));
+      modal.show();
+      getdata2(id);
+    }
+
+    function handleNetworkError() {
+      showModalMessage("Network Error");
+    }
+
+    function getcourse() {
+      fetch("http://192.168.29.183:8000/get_all_courses", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          var display = document.querySelector("#tbl_data");
+
+          res.courses.forEach((z) => {
+            var tab =
+              "<tr onclick='popup(" +
+              z.id +
+              ")'><td>" +
+              z.name +
+              "</td><td>" +
+              z.fees +
+              "</td><td>" +
+              z.duration +
+              "</td><td>" +
+              z.prerequisites_sub +
+              "</td><td>" +
+              "<button class='btn status-btn'>" +
+              z.status +
+              "</button></td><td hidden>" +
+              z.id +
+              "</td></tr>";
+
+            display.innerHTML += tab;
+          });
+
+          // Set background color based on status
+          document.querySelectorAll(".status-btn").forEach((button) => {
+            if (button.textContent == "1") {
+              button.style.backgroundColor = "#5cb85c";
+              button.style.color = "white";
+              button.innerHTML = "Active";
+            } else {
+              button.style.backgroundColor = "red";
+              button.style.color = "white";
+              button.innerHTML = "De-Active";
+            }
+          });
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error fetching courses:", error);
+        });
+    }
+    getcourse();
+
+    // Function to show modal with a message
+    function showModalMessage(message) {
+      var modal = new bootstrap.Modal(document.getElementById("myModal1"));
+      document.getElementById("modalMessage").innerText = message;
+      modal.show();
+    }
+
+    function getdata2(id) {
+      fetch("http://192.168.29.183:8000/get_course/" + id, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          document.getElementById("name").innerHTML =
+            "<span>" + res.course_name + "</span>";
+          document.getElementById("fees").innerHTML =
+            "<span>" + res.fees + "</span>";
+          document.getElementById("pdf").innerHTML =
+            "<span>" + res.pdf + "</span>";
+          document.getElementById("sam_project").innerHTML =
+            "<span>" + res.sample_project + "</span>";
+          document.getElementById("other_link").innerHTML =
+            "<span>" + res.other_link + "</span>";
+          document.getElementById("note").innerHTML =
+            "<span>" + res.note + "</span>";
+          document.getElementById("duration").innerHTML =
+            "<span>" + res.duration + "</span>";
+          document.getElementById("subjects").innerHTML =
+            "<span>" + res.prerequisites_sub + "</span>";
+          document.getElementById("desc").innerHTML =
+            "<span>" + res.description + "</span>";
+          document.getElementById("obj").innerHTML =
+            "<span>" + res.objective + "</p>";
+          document.getElementById("status").innerHTML =
+            "<span>" + res.status + "</span>";
+
+          console.log(res);
+          sessionStorage.setItem("id", res.course_id);
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error Gatting courses:", error);
+        });
+    }
+
+    function serch_course() {
+      const inputValue = document.getElementById("searchInput").value;
+      fetch(
+        `http://192.168.29.183:8000/search_course?search_course=${inputValue}`,
+        {
+          headers: {
+            accept: "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          displaySearchResults(res);
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error Serching courses:", error);
+        });
+    }
+
+    function displaySearchResults(results) {
+      const tblData = document.getElementById("tbl_data");
+      tblData.innerHTML = ""; // Clear previous search results
+
+      if (results && results.length > 0) {
+        results.forEach((result) => {
+          const tab =
+            "<tr onclick='popup(" +
+            result.id +
+            ")'><td>" +
+            result.course_name +
+            "</td><td>" +
+            result.fees +
+            "</td><td>" +
+            result.duration +
+            "</td><td>" +
+            result.prerequisites_sub +
+            "</td><td>" +
+            "<button class='btn status-btn'>" +
+            result.status +
+            "</button></td><td hidden>" +
+            result.id +
+            "</td></tr>";
+
+          tblData.innerHTML += tab;
+        });
+
+        // Set background color based on status
+        document.querySelectorAll(".status-btn").forEach((button) => {
+          if (button.textContent == "1") {
+            button.style.backgroundColor = "#5cb85c";
+            button.style.color = "white";
+            button.innerHTML = "Active";
+          } else {
+            button.style.backgroundColor = "red";
+            button.style.color = "white";
+            button.innerHTML = "De-Active";
+          }
+        });
+      } else {
+        tblData.innerHTML = "<tr><td colspan='5'>No results found.</td></tr>";
+      }
+    }
+
+    function Counselor_course() {
+      fetch("http://192.168.29.183:8000/get_all_course_counselor", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          var display = document.querySelector("#tbl_couns_data");
+
+          res.course_counselors.forEach((z) => {
+            var tab =
+              "<tr><td>" +
+              z.course_name +
+              "</td><td>" +
+              z.counselor_name +
+              "</td><td>" +
+              z.type_of_operation +
+              "</td><td>" +
+              z.time_stamp +
+              "</td></tr>";
+
+            display.innerHTML += tab;
+          });
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error fetching Counselor courses:", error);
+        });
+    }
+    Counselor_course();
+
+    function Counselor_batches() {
+      fetch("http://192.168.29.183:8000/get_all_batch_counselor", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          var display = document.querySelector("#tbl_counsBatch_data");
+
+          res.batch_counselors.forEach((z) => {
+            var tab =
+              "<tr><td>" +
+              z.batch_name +
+              "</td><td>" +
+              z.counselor_name +
+              "</td><td>" +
+              z.type_of_operation +
+              "</td><td>" +
+              z.time_stamp +
+              "</td></tr>";
+
+            display.innerHTML += tab;
+          });
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error fetching Counselor Batches:", error);
+        });
+    }
+    Counselor_batches();
+
+    function editcourse() {
+      var Cid = sessionStorage.getItem("id");
+      fetch("http://192.168.29.183:8000/get_course/" + Cid, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          console.log(res);
+          // sessionStorage.setItem("id", res.course_id);
+
+          sessionStorage.setItem("name", res.course_name);
+          sessionStorage.setItem("fees", res.fees);
+          sessionStorage.setItem("duration", res.duration);
+          sessionStorage.setItem("pdf", res.pdf);
+          sessionStorage.setItem("prerequisites_sub", res.prerequisites_sub);
+          sessionStorage.setItem("sample_project", res.sample_project);
+          sessionStorage.setItem("description", res.description);
+          sessionStorage.setItem("other_link", res.other_link);
+          sessionStorage.setItem("objective", res.objective);
+          sessionStorage.setItem("note", res.note);
+          sessionStorage.setItem("status", res.status);
+
+          window.location.href = "AddCourses.html";
+        });
+    }
+  </script>
+</html>

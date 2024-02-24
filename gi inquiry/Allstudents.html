@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .dropdown-menu.center {
+        left: 0% !important;
+        transform: translateX(-63%);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Home.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Services
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="AddEnquires.html"
+                    >Add Enquires</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="AddBatch.html">Add Batch</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="AddCourses.html"
+                    >Add Courses</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                All Students
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="Allbatches.html">
+                    All Batches</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- <button class="btn btn-outline-success" type="button">Profile</button> -->
+
+          <div class="dropdown">
+            <button
+              class="btn btn-light dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle fs-4"></i>
+            </button>
+            <ul class="dropdown-menu center">
+              <li><a class="dropdown-item" href="#">Name</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="content">
+        <span class="text text-dark fw-bolder ms-2 fs-1">All Students</span>
+        <input
+          type="search"
+          placeholder="Search Course..."
+          id="searchInput"
+          class="rounded-2 w-50 ms-5"
+          oninput="serch_students()"
+        />
+        <div id="searchResults"></div>
+        <table
+          class="table table-bordered table-hover table-responsive text-center"
+        >
+          <thead>
+            <tr>
+              <th>Student Name</th>
+              <th>Contact</th>
+              <th>Area</th>
+              <th>College Name</th>
+              <th>Mode</th>
+              <th>Date Of Join</th>
+              <th>Course</th>
+              <!-- <th hidden>id</th> -->
+            </tr>
+          </thead>
+          <tbody id="tbl_data"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Task Details View</h5>
+          </div>
+          <div class="modal-body">
+            <h5>Name: <span id="name"></span></h5>
+            <h5>Email: <span id="email"></span></h5>
+            <h5>Contact 1: <span id="fcon"></span></h5>
+            <h5>Contact 2: <span id="scon"></span></h5>
+            <h5>Area: <span id="area"></span></h5>
+            <h5>College Name: <span id="cname"></span></h5>
+            <h5>Mode: <span id="mode"></span></h5>
+            <h5>Date of Join: <span id="date"></span></h5>
+            <h5>Reference: <span id="ref"></span></h5>
+            <h5>Remark: <span id="remark"></span></h5>
+            <h5>Time stamp: <span id="time"></span></h5>
+            <h5>Course Name: <span id="courname"></span></h5>
+            <h5>Fees: <span id="fees"></span></h5>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-dismiss="modal"
+              onclick="close()"
+            >
+              Close
+            </button>
+
+            <a
+              href="AddEnquires.html"
+              style="text-decoration: none"
+              id="editLink"
+            >
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                id="btned"
+                onclick="edit()"
+              >
+                Edit
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function popup(id) {
+      var modal = new bootstrap.Modal(document.querySelector(".modal"));
+      modal.show();
+      getdata2(id);
+    }
+
+    function get_Students() {
+      fetch("http://192.168.29.183:8000/get_all_students", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          var display = document.querySelector("#tbl_data");
+
+          res.students.map((z) => {
+            var tab =
+              "<tr onclick='popup(" +
+              z.student_id +
+              ")'><td>" +
+              z.name +
+              "</td><td>" +
+              z.contact_1 +
+              "</td><td>" +
+              z.area +
+              "</td><td>" +
+              z.college_name +
+              "</td><td>" +
+              z.mode +
+              "</td><td>" +
+              z.date_of_join +
+              "</td><td id='cor_" +
+              z.student_id +
+              "'>" + // Make the id unique for each student
+              "</td></tr>";
+
+            display.innerHTML += tab;
+            console.log(z);
+
+            var cour = z.courses;
+            cour.map((c) => {
+              var dis = "<tr><td>" + c.course_name + "</td></tr>";
+              document.getElementById("cor_" + z.student_id).innerHTML +=
+                " " + dis; // Update the specific cell for each student
+            });
+          });
+
+          // Set background color based on status
+          document.querySelectorAll(".status-btn").forEach((button) => {
+            if (button.textContent == "1") {
+              button.style.backgroundColor = "#5cb85c";
+              button.style.color = "white";
+              button.innerHTML = "Active";
+            } else {
+              button.style.backgroundColor = "red";
+              button.style.color = "white";
+              button.innerHTML = "De-Active";
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching courses:", error);
+        });
+    }
+    get_Students();
+
+    function getdata2(id) {
+      fetch("http://192.168.29.183:8000/get_student/" + id, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          document.getElementById("name").innerHTML =
+            "<span>" + res.name + "</span>";
+          document.getElementById("email").innerHTML =
+            "<span>" + res.email + "</span>";
+          document.getElementById("fcon").innerHTML =
+            "<span>" + res.contact_1 + "</span>";
+          document.getElementById("scon").innerHTML =
+            "<span>" + res.contact_2 + "</span>";
+          document.getElementById("area").innerHTML =
+            "<span>" + res.area + "</span>";
+          document.getElementById("cname").innerHTML =
+            "<span>" + res.college_name + "</span>";
+          document.getElementById("mode").innerHTML =
+            "<span>" + res.mode + "</span>";
+          document.getElementById("date").innerHTML =
+            "<span>" + res.date_of_join + "</span>";
+          document.getElementById("ref").innerHTML =
+            "<span>" + res.reference + "</span>";
+          document.getElementById("remark").innerHTML =
+            "<span id='display_remark'></span>";
+          document.getElementById("time").innerHTML =
+            "<span id='display_timestamp'></span>";
+          document.getElementById("courname").innerHTML =
+            "<span id='coursdisp'></span>";
+          document.getElementById("fees").innerHTML =
+            "<span id='feesdisp'></span>";
+          console.log(res);
+
+          sessionStorage.setItem("name", res.name);
+          sessionStorage.setItem("email", res.email);
+          sessionStorage.setItem("fcontact", res.contact_1);
+          sessionStorage.setItem("scontact", res.contact_2);
+          sessionStorage.setItem("area", res.area);
+          sessionStorage.setItem("college_name", res.college_name);
+          sessionStorage.setItem("mode", res.mode);
+          sessionStorage.setItem("date", res.date_of_join);
+          sessionStorage.setItem("reference", res.reference);
+          sessionStorage.setItem("sid", res.student_id);
+
+          res.remarks.map((z) => {
+            var d = "<tr><td>" + z.remark + "</td></tr>";
+            document.getElementById("display_remark").innerHTML += d + " ";
+            sessionStorage.setItem("remark", z.remark);
+
+            var f = "<tr><td>" + z.time_stamp + "</td></tr>";
+            document.getElementById("display_timestamp").innerHTML += f + " ";
+
+            // sessionStorage.setItem("remark", z.remark);
+          });
+
+          res.courses.map((z) => {
+            var d = "<tr><td>" + z.course_name + "</td></tr>";
+            document.getElementById("coursdisp").innerHTML += d + " ";
+            sessionStorage.setItem("coursename", z.course_name);
+
+            var f = "<tr><td>" + z.fees + "</td></tr>";
+            document.getElementById("feesdisp").innerHTML += f + " ";
+            sessionStorage.setItem("coursefees", z.fees);
+          });
+        })
+        .catch((error) => {
+          alert("something went wrong in get data");
+        });
+    }
+
+    function serch_students() {
+      const inputValue = document.getElementById("searchInput").value;
+      fetch(
+        `http://192.168.29.183:8000/search_student?search_term=${inputValue}`,
+        {
+          headers: {
+            accept: "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          displaySearchResults(res);
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error Serching courses:", error);
+        });
+    }
+
+    // Function to display search results
+    function displaySearchResults(results) {
+      const tblData = document.getElementById("tbl_data");
+      tblData.innerHTML = ""; // Clear previous search results
+
+      if (results && results.length > 0) {
+        results.forEach((result) => {
+          const tab =
+            "<tr onclick='popup(" +
+            result.student_id +
+            ")'><td>" +
+            result.name +
+            "</td><td>" +
+            result.contact_1 +
+            "</td><td>" +
+            result.area +
+            "</td><td>" +
+            result.college_name +
+            "</td><td>" +
+            result.mode +
+            "</td><td>" +
+            result.date_of_join +
+            "</td><td id='coursdisp_" +
+            result.student_id +
+            "'></td></tr>";
+
+          tblData.innerHTML += tab;
+
+          // Loop through each course and display it in a separate row within the table cell
+          result.courses.forEach((course) => {
+            var d = "<tr><td>" + course.course_name + "</td></tr>";
+            document.getElementById(
+              "coursdisp_" + result.student_id
+            ).innerHTML += d;
+          });
+        });
+      }
+    }
+    function edit() {
+      window.location.href = "AddEnquires.html";
+    }
+  </script>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .dropdown-menu.center {
+        left: 0% !important;
+        transform: translateX(-63%);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="Home.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Services
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="AddEnquires.html"
+                    >Add Enquires</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="AddBatch.html">Add Batch</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="AddCourses.html"
+                    >Add Courses</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                All Batches
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="Allstudents.html">
+                    All Students</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- <button class="btn btn-outline-success" type="button">Profile</button> -->
+
+          <div class="dropdown">
+            <button
+              class="btn btn-light dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle fs-4"></i>
+            </button>
+            <ul class="dropdown-menu center">
+              <li><a class="dropdown-item" href="#">Name</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="content">
+        <span class="text text-dark fw-bolder ms-2 fs-1">All Batches</span>
+        <input
+          type="search"
+          placeholder="Search Course..."
+          id="searchInput"
+          class="rounded-2 w-50 ms-5"
+          oninput="serch_batches()"
+        />
+        <div id="searchResults"></div>
+        <table
+          class="table table-bordered table-hover table-responsive text-center"
+        >
+          <thead>
+            <tr>
+              <th>Batch Name</th>
+              <th>Course Name</th>
+              <th>Time</th>
+              <th>Trainer Name</th>
+              <!-- <th hidden>id</th> -->
+            </tr>
+          </thead>
+          <tbody id="tbl_data"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Task Details View</h5>
+          </div>
+          <div class="modal-body">
+            <h5>Name: <span id="name"></span></h5>
+            <h5>Fees: <span id="fees"></span></h5>
+            <h5>Pdf: <span id="pdf"></span></h5>
+            <h5>Sample Project: <span id="sam_project"></span></h5>
+            <h5>Other Link: <span id="other_link"></span></h5>
+            <h5>Note: <span id="note"></span></h5>
+            <h5>Duration: <span id="duration"></span></h5>
+            <h5>prerequisites_sub: <span id="subjects"></span></h5>
+            <h5>description: <span id="desc"></span></h5>
+            <h5>objective: <span id="obj"></span></h5>
+            <h5>status: <span id="status"></span></h5>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-dismiss="modal"
+              onclick="close()"
+            >
+              Close
+            </button>
+
+            <a href="edit.html" style="text-decoration: none" id="editLink">
+              <button type="button" class="btn btn-outline-warning" id="btned">
+                Edit
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function popup(id) {
+      var modal = new bootstrap.Modal(document.querySelector(".modal"));
+      modal.show();
+      getdata2(id);
+    }
+
+    function get_batches() {
+      fetch("http://192.168.29.183:8000/get_all_batches", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          var display = document.querySelector("#tbl_data");
+
+          res.batches.forEach((z) => {
+            var tab =
+              "<tr onclick='popup(" +
+              z.batch_id +
+              ")'><td>" +
+              z.batch_name +
+              "</td><td>" +
+              z.course_name +
+              "</td><td>" +
+              z.time +
+              "</td><td>" +
+              z.trainer_name +
+              "</td><td hidden>" +
+              z.batch_id +
+              "</td></tr>";
+
+            display.innerHTML += tab;
+          });
+
+          // Set background color based on status
+          document.querySelectorAll(".status-btn").forEach((button) => {
+            if (button.textContent == "1") {
+              button.style.backgroundColor = "#5cb85c";
+              button.style.color = "white";
+              button.innerHTML = "Active";
+            } else {
+              button.style.backgroundColor = "red";
+              button.style.color = "white";
+              button.innerHTML = "De-Active";
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching courses:", error);
+        });
+    }
+    get_batches();
+
+    function getdata2(id) {
+      fetch("http://192.168.29.183:8000/get_batch/" + id, {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          document.getElementById("name").innerHTML =
+            "<span>" + res.batch_name + "</span>";
+          document.getElementById("fees").innerHTML =
+            "<span>" + res.course_name + "</span>";
+          document.getElementById("pdf").innerHTML =
+            "<span>" + res.time + "</span>";
+          document.getElementById("sam_project").innerHTML =
+            "<span>" + res.trainer_name + "</span>";
+          document.getElementById("other_link").innerHTML =
+            "<span>" + res.daily_hours + "</span>";
+          document.getElementById("note").innerHTML =
+            "<span>" + res.weekly_days + "</span>";
+          document.getElementById("duration").innerHTML =
+            "<span>" + res.start_date + "</span>";
+          document.getElementById("subjects").innerHTML =
+            "<span>" + res.expected_end_date + "</span>";
+          document.getElementById("desc").innerHTML =
+            "<span>" + res.status + "</span>";
+          document.getElementById("obj").innerHTML =
+            "<span>" + res.time_stamp + "</p>";
+
+          console.log(res);
+        })
+        .catch((error) => {
+          alert("something went wrong in get data");
+        });
+    }
+    function serch_batches() {
+      const inputValue = document.getElementById("searchInput").value;
+      fetch(
+        `http://192.168.29.183:8000/search_batch?search_batch=${inputValue}`,
+        {
+          headers: {
+            accept: "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          displaySearchResults(res);
+        })
+        .catch((error) => {
+          handleNetworkError();
+          console.error("Error Serching courses:", error);
+        });
+    }
+
+    function displaySearchResults(results) {
+      const tblData = document.getElementById("tbl_data");
+      tblData.innerHTML = ""; // Clear previous search results
+
+      if (results && results.length > 0) {
+        results.forEach((result) => {
+          const tab =
+            "<tr onclick='popup(" +
+            result.batch_id +
+            ")'><td>" +
+            result.batch_name +
+            "</td><td>" +
+            result.course_name +
+            "</td><td>" +
+            result.time +
+            "</td><td>" +
+            result.trainer_name +
+            "</td></tr>";
+
+          tblData.innerHTML += tab;
+        });
+      }
+    }
+  </script>
+</html>
